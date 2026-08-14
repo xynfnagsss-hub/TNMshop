@@ -28,7 +28,7 @@
   --gradient-dark-banner: linear-gradient(90deg, #07080a 0%, #1a1a1a 50%, #07080a 100%);
 
   /* Typography */
-  --font-heading: 'Outfit', 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: 'Anton', 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
@@ -37,11 +37,22 @@
   --shadow-gold-lg: 0 10px 35px rgba(255, 255, 255, 0.2);
   --shadow-dark: 0 20px 50px rgba(0, 0, 0, 0.9);
   --backdrop-blur: blur(20px);
-  --radius-sm: 6px;
-  --radius-md: 12px;
-  --radius-lg: 18px;
+  --radius-sm: 3px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
   --radius-full: 9999px;
   --transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Film Grain Texture Overlay */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 /* Reset & Base */
@@ -86,14 +97,14 @@ body {
   filter: blur(140px);
   pointer-events: none;
   z-index: 0;
-  opacity: 0.18;
+  opacity: 0.08;
   animation: floatOrb 22s ease-in-out infinite alternate;
 }
 
 .orb-1 {
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, #e6e6e6 0%, transparent 70%);
+  background: radial-gradient(circle, #ffffff 0%, transparent 70%);
   top: -150px;
   left: 10%;
 }
@@ -101,7 +112,7 @@ body {
 .orb-2 {
   width: 650px;
   height: 650px;
-  background: radial-gradient(circle, #8a8a8a 0%, transparent 70%);
+  background: radial-gradient(circle, #666666 0%, transparent 70%);
   top: 40%;
   right: -150px;
   animation-delay: -8s;
@@ -110,7 +121,7 @@ body {
 .orb-3 {
   width: 450px;
   height: 450px;
-  background: radial-gradient(circle, #ffffff 0%, transparent 70%);
+  background: radial-gradient(circle, #444444 0%, transparent 70%);
   bottom: 0%;
   left: 5%;
   animation-delay: -15s;
@@ -195,15 +206,15 @@ body {
   font-family: var(--font-heading);
   font-size: 1.45rem;
   font-weight: 900;
-  letter-spacing: -0.5px;
+  letter-spacing: 0.5px;
 }
 
 .brand-logo-img {
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  border: 2px solid var(--gold-glow);
-  box-shadow: var(--shadow-gold);
+  border: 2px solid #ffffff;
+  filter: grayscale(1) contrast(1.15);
   object-fit: cover;
 }
 
@@ -482,18 +493,19 @@ body {
 }
 
 .hero-emblem {
-  width: 130px;
-  height: 130px;
+  width: 128px;
+  height: 128px;
   border-radius: 50%;
-  border: 3px solid var(--gold-glow);
-  box-shadow: 0 0 35px rgba(255, 255, 255, 0.45);
+  border: 2px solid #ffffff;
+  filter: grayscale(1) contrast(1.15);
+  box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.04), 0 20px 40px rgba(0, 0, 0, 0.8);
   object-fit: cover;
-  animation: emblemPulse 4s ease-in-out infinite alternate;
+  transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-@keyframes emblemPulse {
-  0% { transform: scale(1); box-shadow: 0 0 25px rgba(255, 255, 255, 0.35); }
-  100% { transform: scale(1.04); box-shadow: 0 0 45px rgba(255, 255, 255, 0.6); }
+.hero-emblem:hover {
+  transform: scale(1.03);
+  filter: grayscale(0.6) contrast(1.15);
 }
 
 .hero-badge {
@@ -517,7 +529,7 @@ body {
   font-size: clamp(2.4rem, 5vw, 4.2rem);
   font-weight: 900;
   line-height: 1.1;
-  letter-spacing: -1.5px;
+  letter-spacing: 0.5px;
   text-transform: uppercase;
   margin-bottom: 18px;
   max-width: 860px;
@@ -622,7 +634,7 @@ body {
   font-family: var(--font-heading);
   font-size: 2.2rem;
   font-weight: 900;
-  letter-spacing: -0.8px;
+  letter-spacing: 0.5px;
   text-transform: uppercase;
   margin-bottom: 10px;
 }
@@ -1448,7 +1460,7 @@ body {
   font-family: var(--font-heading);
   font-size: 1.5rem;
   font-weight: 900;
-  letter-spacing: -0.5px;
+  letter-spacing: 0.5px;
   text-transform: uppercase;
   margin-bottom: 6px;
   color: #fff;
@@ -1547,7 +1559,7 @@ body {
   font-size: 1.4rem;
   font-weight: 900;
   color: #fff;
-  letter-spacing: -0.5px;
+  letter-spacing: 0.5px;
   margin-bottom: 6px;
 }
 
